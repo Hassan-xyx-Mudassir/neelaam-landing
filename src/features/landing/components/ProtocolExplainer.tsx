@@ -1,32 +1,33 @@
-import { cn } from "@/lib/utils";
+"use client";
+
+import Timeline, {
+  TimelineItem,
+  TimelineItemTitle,
+  TimelineItemDescription,
+} from "@/components/8starlabs-ui/timeline";
 
 interface Step {
-  number: string;
   title: string;
   description: string;
 }
 
 const steps: Step[] = [
   {
-    number: "01",
     title: "Buyer Wins Auction",
     description:
       "The winning bid triggers an automated smart contract. The buyer's stablecoins (USDT/USDC) are instantly locked on-chain — no middleman, no delay.",
   },
   {
-    number: "02",
     title: "Contract Holds Funds Securely",
     description:
       "Funds remain time-locked in the escrow contract. Neither party can access them until the conditions are met — eliminating payment fraud entirely.",
   },
   {
-    number: "03",
     title: "Buyer Validates Receipt",
     description:
       "Once the item is delivered, the buyer confirms receipt on-chain. This cryptographic proof is the only trigger for fund release.",
   },
   {
-    number: "04",
     title: "Programmatic Payout",
     description:
       "The contract automatically releases payment to the seller. If a dispute arises, it routes to a decentralized multi-sig arbitration protocol.",
@@ -36,7 +37,7 @@ const steps: Step[] = [
 const ProtocolExplainer: React.FC = () => {
   return (
     <section className="relative bg-background py-24">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-4xl px-6">
         {/* Section Header */}
         <div className="mb-16 text-center">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">
@@ -51,34 +52,26 @@ const ProtocolExplainer: React.FC = () => {
           </p>
         </div>
 
-        {/* Steps Grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map((step, idx) => (
-            <div
-              key={step.number}
-              className={cn(
-                "group relative rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)]"
-              )}
-            >
-              {/* Step Number */}
-              <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-sm font-bold text-primary">
-                {step.number}
-              </div>
-
-              {/* Connector line (not on last item) */}
-              {idx < steps.length - 1 && (
-                <div className="absolute -right-3 top-1/2 hidden h-px w-6 bg-gradient-to-r from-primary/40 to-transparent lg:block" />
-              )}
-
-              <h3 className="mb-2 text-lg font-semibold text-foreground">
+        {/* Timeline */}
+        <Timeline
+          orientation="vertical"
+          alternating={false}
+          alignment="top/left"
+          vertItemSpacing={140}
+          vertItemMaxWidth={380}
+          noCards={false}
+        >
+          {steps.map((step) => (
+            <TimelineItem key={step.title} variant="default">
+              <TimelineItemTitle className="text-foreground">
                 {step.title}
-              </h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">
+              </TimelineItemTitle>
+              <TimelineItemDescription>
                 {step.description}
-              </p>
-            </div>
+              </TimelineItemDescription>
+            </TimelineItem>
           ))}
-        </div>
+        </Timeline>
 
         {/* Dispute Resolution Note */}
         <div className="mt-10 rounded-xl border border-border bg-card/50 p-6 text-center backdrop-blur-sm">

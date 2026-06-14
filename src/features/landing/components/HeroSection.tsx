@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import StatusIndicator from "@/components/8starlabs-ui/status-indicator";
 
 const HeroSection: React.FC = () => {
   return (
@@ -13,9 +15,21 @@ const HeroSection: React.FC = () => {
       </div>
 
       <div className="relative z-10 mx-auto max-w-6xl px-6 py-24 text-center">
-        {/* Simulated Web3 Wallet State */}
+        {/* Logo */}
+        <div className="mb-8 flex items-center justify-center">
+          <Image
+            src="/neelaam-logo-clear.png"
+            alt="Neelaam Logo"
+            width={180}
+            height={48}
+            className="h-12 w-auto"
+            priority
+          />
+        </div>
+
+        {/* Simulated Web3 Wallet State — using StatusIndicator */}
         <div className="mx-auto mb-10 inline-flex items-center gap-3 rounded-xl border border-primary/30 bg-card/80 px-5 py-3 shadow-[0_0_30px_rgba(139,92,246,0.15)] backdrop-blur-md">
-          <span className="inline-block h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
+          <StatusIndicator state="active" size="sm" />
           <span className="font-mono text-sm text-muted-foreground">
             0x71C<span className="text-foreground/40">•••</span>3a9f
           </span>
@@ -45,9 +59,11 @@ const HeroSection: React.FC = () => {
           <Button size="lg" className="min-w-[200px] text-base font-semibold shadow-[0_0_24px_rgba(139,92,246,0.35)]">
             Join the Waitlist
           </Button>
-          <Button variant="outline" size="lg" className="min-w-[200px] text-base font-semibold">
-            See How It Works
-          </Button>
+          <Link href="/neelaam-pitch-deck.pdf" target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" size="lg" className="min-w-[200px] text-base font-semibold">
+              See How It Works
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

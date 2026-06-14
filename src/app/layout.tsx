@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   title: "Neelaam — Trustless P2P Marketplace",
   description:
     "Neelaam is a trustless, blockchain-powered peer-to-peer auction and marketplace tailored for emerging markets. Eliminate fraud with cryptographic escrow.",
+  icons: {
+    icon: "/neelaam-favicon.png",
+  },
 };
 
 export default function RootLayout({
